@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterListe.ItemClickInterface{
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
         recyclerView.setAdapter(adapterListe);
 
         RESTTask restTask = new RESTTask();
+        Log.d("GREŠKA", "TU SAM ");
         restTask.execute("http://api.hnb.hr/tecajn/v2");
+
     }
 
     @Override
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
         @Override
         protected List<Tecaj> doInBackground(String... strings) {
-
+            Log.d("GREŠKA", "TU SAM 2");
             String adresa=strings[0];
             try{
                 URL url=new URL(adresa);
@@ -68,12 +71,15 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
                 BufferedReader reader=new BufferedReader(streamReader);
 
-                Odgovor odgovor=new Gson().fromJson(reader,Odgovor.class);
+
+                Tecaj[] mcArray = new Gson().fromJson(reader, Tecaj[].class);
+
+                List<Tecaj> mcList = Arrays.asList(mcArray);
 
                 reader.close();
                 streamReader.close();
 
-                return odgovor.getTecaj();
+                return mcList;
             } catch (Exception e) {
                 Log.d("GREŠKA", e.getMessage());
             }

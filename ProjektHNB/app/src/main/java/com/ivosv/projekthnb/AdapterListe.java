@@ -1,6 +1,7 @@
 package com.ivosv.projekthnb;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,11 +39,12 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
     public void onBindViewHolder(Red holder, int position) {
 
         Tecaj tecaj=tecaji.get(position);
-        holder.drzava.setText("Kurac od ovce");//(tecaj.getDrzava());
-        holder.valuta.setText("Drugi kurac od ovce");//(tecaj.getValuta());
+        holder.drzava.setText(tecaj.getDrzava());
+        holder.valuta.setText(tecaj.getValuta());
       /*  holder.kupovni.setText(tecaj.getKupovni());
         holder.srednji.setText(tecaj.getSrednji());
         holder.prodajni.setText((tecaj.getProdajni()));*/
+        Log.d("Drugi kurac od ovce","Kurac od ovce");
 
     }
 
