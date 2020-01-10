@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Tecaj implements Serializable {
 
-    private int id;
+
     private String drzava;
     private String drzava_iso;
     private String valuta;
@@ -17,8 +17,8 @@ public class Tecaj implements Serializable {
     public Tecaj() {
     }
 
-    public Tecaj(int id, String drzava, String iso, String valuta, String kupovni, String srednji, String prodajni, String date, String urlSlika) {
-        this.id = id;
+    public Tecaj(String drzava, String iso, String valuta, String kupovni, String srednji, String prodajni, String date, String urlSlika) {
+
         this.drzava = drzava;
         this.drzava_iso = iso;
         this.valuta = valuta;
@@ -29,9 +29,7 @@ public class Tecaj implements Serializable {
 
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getDrzava() {
         return drzava;
@@ -63,9 +61,6 @@ public class Tecaj implements Serializable {
 
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setDrzava(String drzava) {
         this.drzava = drzava;

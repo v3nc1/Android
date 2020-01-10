@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
         recyclerView.setAdapter(adapterListe);
 
         RESTTask restTask = new RESTTask();
-        restTask.execute("http://api.hnb.hr/tecajn/v2?valuta=EUR&valuta=USD");
+        restTask.execute("http://api.hnb.hr/tecajn/v2");
     }
 
     @Override

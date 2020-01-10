@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.InputStream;
 
 public class Detalji extends AppCompatActivity {
-/*
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,6 +41,12 @@ public class Detalji extends AppCompatActivity {
                 }
                 return mIconl;
             }
+
+            @Override
+            protected Bitmap doInBackground(String... strings) {
+                return null;
+            }
+
             @Override
             protected void onPostExecute(Bitmap result){
 
@@ -50,6 +56,6 @@ public class Detalji extends AppCompatActivity {
 
         }
 
-*/
+
 
 }

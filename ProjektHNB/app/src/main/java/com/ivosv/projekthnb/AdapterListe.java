@@ -38,11 +38,11 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
     public void onBindViewHolder(Red holder, int position) {
 
         Tecaj tecaj=tecaji.get(position);
-        holder.drzava.setText(tecaj.getDrzava());
-        holder.valuta.setText(tecaj.getValuta());
-        holder.kupovni.setText(tecaj.getKupovni());
+        holder.drzava.setText("Kurac od ovce");//(tecaj.getDrzava());
+        holder.valuta.setText("Drugi kurac od ovce");//(tecaj.getValuta());
+      /*  holder.kupovni.setText(tecaj.getKupovni());
         holder.srednji.setText(tecaj.getSrednji());
-        holder.prodajni.setText((tecaj.getProdajni()));
+        holder.prodajni.setText((tecaj.getProdajni()));*/
 
     }
 
