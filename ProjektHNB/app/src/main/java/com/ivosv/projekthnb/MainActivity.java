@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
         recyclerView.setAdapter(adapterListe);
 
         RESTTask restTask = new RESTTask();
-        Log.d("GREŠKA", "TU SAM ");
+
         restTask.execute("http://api.hnb.hr/tecajn/v2");
 
     }
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
         @Override
         protected List<Tecaj> doInBackground(String... strings) {
-            Log.d("GREŠKA", "TU SAM 2");
+
             String adresa=strings[0];
             try{
                 URL url=new URL(adresa);
@@ -72,14 +72,14 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
                 BufferedReader reader=new BufferedReader(streamReader);
 
 
-                Tecaj[] mcArray = new Gson().fromJson(reader, Tecaj[].class);
+                Tecaj[] tecajArray = new Gson().fromJson(reader, Tecaj[].class);
 
-                List<Tecaj> mcList = Arrays.asList(mcArray);
+                List<Tecaj> tecajList = Arrays.asList(tecajArray);
 
                 reader.close();
                 streamReader.close();
 
-                return mcList;
+                return tecajList;
             } catch (Exception e) {
                 Log.d("GREŠKA", e.getMessage());
             }

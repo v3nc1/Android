@@ -1,6 +1,8 @@
 package com.ivosv.projekthnb;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Tecaj implements Serializable {
 
@@ -12,6 +14,7 @@ public class Tecaj implements Serializable {
     private String srednji_tecaj;
     private String prodajni_tecaj;
     private String datum_primjene;
+    private static Map<String,String> linkZastava =new HashMap<>();
 
 
     public Tecaj() {
@@ -29,6 +32,17 @@ public class Tecaj implements Serializable {
 
     }
 
+    public static String getZastave(String key){
+
+        return linkZastava.get(key);
+
+    }
+
+    public static void setZastava(String key,String value){
+
+        linkZastava.put(key,value);
+
+    }
 
 
     public String getDrzava() {
