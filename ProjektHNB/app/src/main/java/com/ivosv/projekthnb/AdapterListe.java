@@ -1,15 +1,21 @@
 package com.ivosv.projekthnb;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.nfc.Tag;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
@@ -40,10 +46,10 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
 
         Tecaj tecaj=tecaji.get(position);
         holder.drzava.setText(tecaj.getDrzava());
-        holder.valuta.setText(tecaj.getValuta());
-      /*  holder.kupovni.setText(tecaj.getKupovni());
-        holder.srednji.setText(tecaj.getSrednji());
-        holder.prodajni.setText((tecaj.getProdajni()));*/
+        new DownloadImageTask((ImageView) holder.slika).execute(tecaj.getFlagUrl());
+       // holder.slika.setImageBitmap();
+        //holder.valuta.setText(tecaj.getValuta());
+
         Log.d("Drugi kurac od ovce","Kurac od ovce");
 
     }
@@ -61,26 +67,54 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
     public class Red extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView drzava;
+        private ImageView slika;
         private TextView valuta;
         private TextView kupovni;
         private TextView srednji;
         private TextView prodajni;
 
+
         public Red(View view){
             super(view);
             drzava=view.findViewById(R.id.drzava);
-            valuta=view.findViewById(R.id.valuta);
-          /*  kupovni=view.findViewById(R.id.kupovni);
-            srednji=view.findViewById(R.id.srednji);
-            prodajni=view.findViewById(R.id.prodajni);*/
+            slika=view.findViewById(R.id.slika);
+
             view.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            int br;
             if(itemClickInterface != null){
+                br=getAdapterPosition();
                 itemClickInterface.onItemClick(v,getAdapterPosition());
+
+                Log.d("KLIK","onClick: "+ br);
             }
+        }
+    }
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 

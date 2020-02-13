@@ -1,5 +1,6 @@
 package com.ivosv.projekthnb;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,13 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
     @Override
     public void onItemClick(View view, int position) {
+        Tecaj tecaj=adapterListe.getTecaj(position);
+        Log.d("Odabrana valuta", tecaj.getDrzava_iso());
+
+        Intent intent=new Intent(this,Detalji.class);
+        intent.putExtra("tecaj",tecaj);
+        startActivity(intent);
+
     }
 
     private class RESTTask extends AsyncTask<String,Void, List<Tecaj>>{
@@ -58,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
         protected List<Tecaj> doInBackground(String... strings) {
 
             String adresa=strings[0];
+            String urlPart1="https://www.countryflags.io/";
+            String urlPart2="/shiny/64.png";
             try{
                 URL url=new URL(adresa);
 
@@ -78,6 +88,73 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
                 reader.close();
                 streamReader.close();
+                for (Tecaj l:tecajList){
+
+
+                    switch (l.getDrzava_iso()){
+
+                        case "AUS":
+                            l.setFlagUrl(urlPart1+"AU"+urlPart2);
+                            Tecaj.setZastava("AUS","AU");
+                            break;
+                        case "CAN":
+                            l.setFlagUrl(urlPart1+"CA"+urlPart2);
+                            Tecaj.setZastava("CAN","CA");
+                            break;
+                        case "CZE":
+                            l.setFlagUrl(urlPart1+"CZ"+urlPart2);
+                            Tecaj.setZastava("CZE","CZ");
+                            break;
+                        case "DNK":
+                            l.setFlagUrl(urlPart1+"DK"+urlPart2);
+                            Tecaj.setZastava("DNK","DK");
+                            break;
+                        case "HUN":
+                            l.setFlagUrl(urlPart1+"HU"+urlPart2);
+                            Tecaj.setZastava("HUN","HU");
+                            break;
+                        case "JPN":
+                            l.setFlagUrl(urlPart1+"JP"+urlPart2);
+                            Tecaj.setZastava("JPN","JP");
+                            break;
+                        case "NOR":
+                            l.setFlagUrl(urlPart1+"NO"+urlPart2);
+                            Tecaj.setZastava("NOR","NO");
+                            break;
+                        case "SWE":
+                            l.setFlagUrl(urlPart1+"SE"+urlPart2);
+                            Tecaj.setZastava("SWE","SE");
+                            break;
+                        case "CHE":
+                            l.setFlagUrl(urlPart1+"CH"+urlPart2);
+                            Tecaj.setZastava("CHE","CH");
+                            break;
+                        case "GBR":
+                            l.setFlagUrl(urlPart1+"GB"+urlPart2);
+                            Tecaj.setZastava("GBR","GB");
+                            break;
+                        case "USA":
+                            l.setFlagUrl(urlPart1+"US"+urlPart2);
+                            Tecaj.setZastava("USA","US");
+                            break;
+                        case "BIH":
+                            l.setFlagUrl(urlPart1+"BA"+urlPart2);
+                            Tecaj.setZastava("BIH","BA");
+                            break;
+                        case "EMU":
+                            l.setFlagUrl(urlPart1+"EU"+urlPart2);
+                            Tecaj.setZastava("EMU","EU");
+                            break;
+                        case "POL":
+                            l.setFlagUrl(urlPart1+"PL"+urlPart2);
+                            Tecaj.setZastava("POL","PL");
+                            break;
+                         default:
+                             Log.d("ERROR", "NO DATA ");
+
+                    }
+                    Log.d("Red",l.getDrzava_iso()+" - "+Tecaj.getZastave(l.getDrzava_iso())+" "+l.getFlagUrl());
+                }
 
                 return tecajList;
             } catch (Exception e) {

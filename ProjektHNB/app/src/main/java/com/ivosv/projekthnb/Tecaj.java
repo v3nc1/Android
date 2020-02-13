@@ -14,6 +14,7 @@ public class Tecaj implements Serializable {
     private String srednji_tecaj;
     private String prodajni_tecaj;
     private String datum_primjene;
+    private String flagUrl;
     private static Map<String,String> linkZastava =new HashMap<>();
 
 
@@ -73,6 +74,8 @@ public class Tecaj implements Serializable {
         return datum_primjene;
     }
 
+    public String getFlagUrl(){return flagUrl;}
+
 
 
 
@@ -103,6 +106,8 @@ public class Tecaj implements Serializable {
     public void setDate(String date) {
         this.datum_primjene = date;
     }
+
+    public void setFlagUrl(String flagUrl){this.flagUrl=flagUrl;}
 
 
 }
