@@ -6,4 +6,5 @@
     <string name="labelaProdajni">Prodajni tecaj</string>
     <string name="labelaSrednji">Srednji tecaj</string>
     <string name="labelaKupovni">Kupovni tecaj</string>
+    <string name="labelaButton">Nazad</string>
 </resources>

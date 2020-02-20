@@ -31,18 +31,21 @@
             android:id="@+id/imeDrzave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:id="@+id/valuta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30sp"/>
+            android:textSize="24sp"
+            android:gravity="center"
+            android:background="@drawable/border"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/border">
 
 
             <TextView
@@ -51,21 +54,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/labelaKupovni"
-                android:textSize="30sp"/>
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/kupovniVal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="30sp"/>
+                android:gravity="right"
+                android:textSize="24sp"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/border">
 
             <TextView
                 android:id="@+id/srednji"
@@ -73,20 +78,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/labelaSrednji"
-                android:textSize="30sp"/>
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/srednjiVal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="30sp"/>
+                android:gravity="right"
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@drawable/border">
 
             <TextView
                 android:id="@+id/prodajni"
@@ -94,21 +101,22 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/labelaProdajni"
-                android:textSize="30sp"/>
+                android:textSize="24sp"/>
 
             <TextView
                 android:id="@+id/prodajniVal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="30sp"/>
+                android:gravity="right"
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/back"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button"
-            android:textSize="30sp"/>
+            android:text="@string/labelaButton"
+            android:textSize="30sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

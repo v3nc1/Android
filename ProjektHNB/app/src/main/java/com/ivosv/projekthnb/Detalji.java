@@ -36,16 +36,16 @@ public class Detalji extends AppCompatActivity {
         drzava.setText(String.valueOf(tecaj.getDrzava()));
 
         TextView valuta=findViewById(R.id.valuta);
-        valuta.setText(String.valueOf(tecaj.getValuta()));
+        valuta.setText(String.valueOf(tecaj.getJedinica()+" "+tecaj.getValuta()));
 
         TextView kupovni=findViewById(R.id.kupovniVal);
-        kupovni.setText(String.valueOf(tecaj.getKupovni()));
+        kupovni.setText(String.valueOf(tecaj.getKupovni()+" kn"));
 
         TextView srednji=findViewById(R.id.srednjiVal);
-        srednji.setText(String.valueOf(tecaj.getSrednji()));
+        srednji.setText(String.valueOf(tecaj.getSrednji()+" kn"));
 
         TextView prodajni=findViewById(R.id.prodajniVal);
-        prodajni.setText(String.valueOf(tecaj.getProdajni()));
+        prodajni.setText(String.valueOf(tecaj.getProdajni()+" kn"));
 
         Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {

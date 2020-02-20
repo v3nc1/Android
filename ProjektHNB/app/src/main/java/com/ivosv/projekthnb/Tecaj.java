@@ -14,6 +14,7 @@ public class Tecaj implements Serializable {
     private String srednji_tecaj;
     private String prodajni_tecaj;
     private String datum_primjene;
+    private String jedinica;
     private String flagUrl;
     private static Map<String,String> linkZastava =new HashMap<>();
 
@@ -21,11 +22,12 @@ public class Tecaj implements Serializable {
     public Tecaj() {
     }
 
-    public Tecaj(String drzava, String iso, String valuta, String kupovni, String srednji, String prodajni, String date, String urlSlika) {
+    public Tecaj(String drzava, String iso, String valuta, String jedinica, String kupovni, String srednji, String prodajni, String date, String urlSlika) {
 
         this.drzava = drzava;
         this.drzava_iso = iso;
         this.valuta = valuta;
+        this.jedinica=jedinica;
         this.kupovni_tecaj = kupovni;
         this.srednji_tecaj = srednji;
         this.prodajni_tecaj = prodajni;
@@ -70,6 +72,10 @@ public class Tecaj implements Serializable {
         return prodajni_tecaj;
     }
 
+    public String getJedinica() {
+        return jedinica;
+    }
+
     public String getDate() {
         return datum_primjene;
     }
@@ -101,6 +107,10 @@ public class Tecaj implements Serializable {
 
     public void setProdajni(String prodajni) {
         this.prodajni_tecaj = prodajni;
+    }
+
+    public void getJedinica(String jedinica) {
+        this.jedinica = jedinica;
     }
 
     public void setDate(String date) {
