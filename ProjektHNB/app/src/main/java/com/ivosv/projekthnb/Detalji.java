@@ -14,8 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
+
 
 public class Detalji extends AppCompatActivity {
 
@@ -31,11 +30,22 @@ public class Detalji extends AppCompatActivity {
 
         Tecaj tecaj = (Tecaj) intent.getSerializableExtra("tecaj");
 
-        TextView drzava=findViewById(R.id.drzava);
+        new DownloadImageTask((ImageView) findViewById(R.id.slika)).execute(tecaj.getFlagUrl());
+
+        TextView drzava=findViewById(R.id.imeDrzave);
         drzava.setText(String.valueOf(tecaj.getDrzava()));
 
         TextView valuta=findViewById(R.id.valuta);
-        valuta.setText(String.valueOf(tecaj.getDrzava_iso()));
+        valuta.setText(String.valueOf(tecaj.getValuta()));
+
+        TextView kupovni=findViewById(R.id.kupovniVal);
+        kupovni.setText(String.valueOf(tecaj.getKupovni()));
+
+        TextView srednji=findViewById(R.id.srednjiVal);
+        srednji.setText(String.valueOf(tecaj.getSrednji()));
+
+        TextView prodajni=findViewById(R.id.prodajniVal);
+        prodajni.setText(String.valueOf(tecaj.getProdajni()));
 
         Button back = findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +55,6 @@ public class Detalji extends AppCompatActivity {
             }
         });
 
-        new DownloadImageTask((ImageView) findViewById(R.id.slika)).execute(tecaj.getFlagUrl());
 
 
     }
@@ -73,20 +82,6 @@ public class Detalji extends AppCompatActivity {
             bmImage.setImageBitmap(result);
         }
     }
-
-            @Override
-            protected Bitmap doInBackground(String... strings) {
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Bitmap result){
-
-                bmImage.setImageBitmap(result);
-            }
-
-
-        }
 
 
 

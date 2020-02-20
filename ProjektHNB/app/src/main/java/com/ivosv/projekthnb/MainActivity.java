@@ -48,16 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
 
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        Tecaj tecaj=adapterListe.getTecaj(position);
-        Log.d("Odabrana valuta", tecaj.getDrzava_iso());
 
-        Intent intent=new Intent(this,Detalji.class);
-        intent.putExtra("tecaj",tecaj);
-        startActivity(intent);
-
-    }
 
     private class RESTTask extends AsyncTask<String,Void, List<Tecaj>>{
 
@@ -173,5 +164,15 @@ public class MainActivity extends AppCompatActivity implements AdapterListe.Item
         protected void onProgressUpdate(Void... values) {
 
         }
+    }
+    @Override
+    public void onItemClick(View view, int position) {
+        Tecaj tecaj=adapterListe.getTecaj(position);
+        Log.d("Odabrana valuta", String.valueOf(tecaj.getDrzava_iso()));
+
+        Intent intent=new Intent(this,Detalji.class);
+        intent.putExtra("tecaj",tecaj);
+        startActivity(intent);
+
     }
 }

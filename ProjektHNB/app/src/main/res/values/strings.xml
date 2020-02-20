@@ -5,5 +5,5 @@
     <string name="labelaValuta">Valuta</string>
     <string name="labelaProdajni">Prodajni tecaj</string>
     <string name="labelaSrednji">Srednji tecaj</string>
-    <string name="labelaKupovni">Kupovni Tecaj</string>
+    <string name="labelaKupovni">Kupovni tecaj</string>
 </resources>

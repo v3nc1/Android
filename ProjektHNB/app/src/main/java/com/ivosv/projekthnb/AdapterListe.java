@@ -47,10 +47,6 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
         Tecaj tecaj=tecaji.get(position);
         holder.drzava.setText(tecaj.getDrzava());
         new DownloadImageTask((ImageView) holder.slika).execute(tecaj.getFlagUrl());
-       // holder.slika.setImageBitmap();
-        //holder.valuta.setText(tecaj.getValuta());
-
-        Log.d("Drugi kurac od ovce","Kurac od ovce");
 
     }
 
@@ -68,10 +64,7 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
 
         private TextView drzava;
         private ImageView slika;
-        private TextView valuta;
-        private TextView kupovni;
-        private TextView srednji;
-        private TextView prodajni;
+
 
 
         public Red(View view){
@@ -89,7 +82,6 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
                 br=getAdapterPosition();
                 itemClickInterface.onItemClick(v,getAdapterPosition());
 
-                Log.d("KLIK","onClick: "+ br);
             }
         }
     }
