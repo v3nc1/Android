@@ -46,7 +46,7 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
 
         Tecaj tecaj=tecaji.get(position);
         holder.drzava.setText(tecaj.getDrzava());
-        new DownloadImageTask((ImageView) holder.slika).execute(tecaj.getFlagUrl());
+        new DownloadImage((ImageView) holder.slika).execute(tecaj.getFlagUrl());
 
     }
 
@@ -66,7 +66,6 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
         private ImageView slika;
 
 
-
         public Red(View view){
             super(view);
             drzava=view.findViewById(R.id.drzava);
@@ -77,39 +76,13 @@ public class AdapterListe extends RecyclerView.Adapter<AdapterListe.Red>{
 
         @Override
         public void onClick(View v) {
-            int br;
+
             if(itemClickInterface != null){
-                br=getAdapterPosition();
                 itemClickInterface.onItemClick(v,getAdapterPosition());
 
             }
         }
     }
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
-
 
     public void setClickListener(ItemClickInterface clickListener) {
         this.itemClickInterface=clickListener;

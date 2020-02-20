@@ -111,12 +111,19 @@
                 android:gravity="right"
                 android:textSize="24sp"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/back"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/labelaButton"
-            android:textSize="30sp" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="@string/labelaButton"
+                android:textSize="30sp" />
+        </RelativeLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
