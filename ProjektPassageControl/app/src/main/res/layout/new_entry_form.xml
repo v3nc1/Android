@@ -108,12 +108,20 @@
             android:layout_margin="2dp"
             android:textSize="24dp"
             android:background="#AEABAA"/>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+            android:layout_weight="4"
+        android:background="#000000">
         <TextView
             android:id="@+id/lblEntryReason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#AEABAA"
             android:layout_margin="2dp"
+            android:layout_weight="1"
             android:text="@string/visit_reason" />
 
         <EditText
@@ -126,6 +134,27 @@
             android:textSize="20dp"
             android:background="#AEABAA"
             android:inputType="textMultiLine" />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="2"
+        android:layout_margin="2dp"
+        android:layout_gravity="start">
+        <Button
+            android:id="@+id/btnCancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancle" />
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save" />
 
+        </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

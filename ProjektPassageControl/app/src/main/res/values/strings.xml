@@ -12,6 +12,8 @@
     <string name="last_name">Prezime</string>
     <string name="id_number">Broj osobne iskaznice</string>
     <string name="visit_reason">Razlog ulaska</string>
+    <string name="cancle">CANCLE</string>
+    <string name="save">SAVE</string>
     <string name="back">BACK</string>
     <string name="exit">EXIT</string>
 
