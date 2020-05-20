@@ -38,4 +38,6 @@ public class PassEntryViewModel extends AndroidViewModel {
 
     public void deleteEntry(){ passDAO.deleteEntry(passEntry);}
 
+
+
 }

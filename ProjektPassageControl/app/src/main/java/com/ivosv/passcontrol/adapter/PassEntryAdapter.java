@@ -34,6 +34,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
     private static class ViewHolder{
 
         private TextView entryDate;
+        private TextView exitDate;
 
 
     }
