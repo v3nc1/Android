@@ -13,7 +13,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ivosv.passcontrol.R;
+import com.ivosv.passcontrol.model.PassEntry;
 import com.ivosv.passcontrol.viewmodel.PassEntryViewModel;
+
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        entryViewModel=ViewModelProviders.of(this).get(PassEntryViewModel.class);
 
         records=(Button) findViewById(R.id.btnRecords);
         preview=(Button) findViewById(R.id.btnOverview);
@@ -46,6 +50,33 @@ public class MainActivity extends AppCompatActivity {
                 closeEntry=(Button) findViewById(R.id.btnCloseRecord);
                 backNewEntryForm=(Button) findViewById(R.id.btnBack);
 
+                newEntry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        cud();
+                        entryViewModel.setEntry(new PassEntry());
+
+                    }
+                });
+
+                closeEntry.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setContentView(R.layout.activity_main);
+
+                    }
+                });
+
+                backNewEntryForm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        setContentView(R.layout.activity_main);
+
+                    }
+
+                });
+
             }
         });
 
@@ -53,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.pregled);
-                entryViewModel= ViewModelProviders.of(this).get(PassEntryViewModel.class);
+
+
                 read();
             }
         });
@@ -65,20 +97,19 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
 
     public PassEntryViewModel getModel(){ return this.entryViewModel;}
-    public void read(){ setFragment();}
+    public void read(){ setFragment(new ReadFragment());}
 
-    public void cud(){ setFragment();}
+    public void cud(){ setFragment(new CUDFragment());}
 
     private void setFragment(Fragment fragment){
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace()
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
+        fragmentTransaction.commit();
 
 
     }

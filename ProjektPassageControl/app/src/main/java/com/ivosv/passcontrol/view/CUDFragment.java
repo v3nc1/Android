@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.ivosv.passcontrol.R;
+import com.ivosv.passcontrol.model.PassEntry;
 import com.ivosv.passcontrol.viewmodel.PassEntryViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -71,7 +72,7 @@ public class CUDFragment extends Fragment {
         passEntryViewModel = ((MainActivity) getActivity()).getModel();
 
         if (passEntryViewModel.getEntry().getId() == 0) {
-            definirajNewEntry();
+            defineNewPassEntry();
             return view;
         }
 
@@ -91,13 +92,22 @@ public class CUDFragment extends Fragment {
         idNumber.setText(passEntryViewModel.getEntry().getIdNumber());
         entryReason.setText(passEntryViewModel.getEntry().getReason());
 
-        Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into();
+        Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into(imgFront);
 
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                takePicture();
+                for (int i=0; i<2;i++){
+
+                    if(i==0){
+                        takePicture("Front",SLIKA_1);
+                    }else{
+                        takePicture("Back",SLIKA_2);
+                    }
+
+
+                }
             }
         });
 
@@ -109,13 +119,19 @@ public class CUDFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 for (int i=0; i<2;i++){
-                    (i==0) ? takePicture("Front",SLIKA_1) : takePicture("Back",SLIKA_2);
+
+                    if(i==0){
+                        takePicture("Front",SLIKA_1);
+                    }else{
+                        takePicture("Back",SLIKA_2);
+                    }
+
 
                 }
 
             }
         });
-        new.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 newPassEntry();
@@ -127,7 +143,7 @@ public class CUDFragment extends Fragment {
         passEntryViewModel.getEntry().setEntryDate(entryTime.getText().toString());
         passEntryViewModel.getEntry().setName(name.getText().toString());
         passEntryViewModel.getEntry().setLastName(lastName.getText().toString());
-        passEntryViewModel.getEntry().setIdNumber((Integer) idNumber.getText().toString());
+        passEntryViewModel.getEntry().setIdNumber(Integer.parseInt(idNumber.getText().toString()));
         passEntryViewModel.getEntry().setReason(entryReason.getText().toString());
         passEntryViewModel.addEntry();
 
@@ -137,7 +153,7 @@ public class CUDFragment extends Fragment {
     @OnClick(R.id.btnCancle)
     public void back(){ ((MainActivity) getActivity()).read();}
 
-    private void takePicture(String orientation, int slika){
+    private void takePicture(String orientation, int slikaBr){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) == null) {
@@ -148,7 +164,7 @@ public class CUDFragment extends Fragment {
 
         File slika = null;
         try {
-            slika = kreirajDatotekuSlike();
+            slika = kreirajDatotekuSlike(orientation);
         } catch (IOException ex) {
             Toast.makeText(getActivity(), "Problem kod kreiranja slike", Toast.LENGTH_LONG).show();
             return;
@@ -161,7 +177,7 @@ public class CUDFragment extends Fragment {
 
         Uri slikaURI = FileProvider.getUriForFile(getActivity(),"com.ivosv.passcontrol.provider", slika);
         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, slikaURI);
-        startActivityForResult(takePictureIntent, slika);
+        startActivityForResult(takePictureIntent, slikaBr);
 
     }
 
@@ -174,9 +190,9 @@ public class CUDFragment extends Fragment {
             Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).into(imgFront);
 
         }else {
-            passEntryViewModel.getEntry().setImgFront("file://" + pictureRoute);
+            passEntryViewModel.getEntry().setImgBack("file://" + pictureRoute);
             passEntryViewModel.closeEntry();
-            Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).into(imgBack);
+            Picasso.get().load(passEntryViewModel.getEntry().getImgBack()).into(imgBack);
 
         }
     }
@@ -194,6 +210,8 @@ public class CUDFragment extends Fragment {
         pictureRoute = image.getAbsolutePath();
         return image;
     }
+
+
 
 
 }

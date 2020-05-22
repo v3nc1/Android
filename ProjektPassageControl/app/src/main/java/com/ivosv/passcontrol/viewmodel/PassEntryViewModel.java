@@ -20,6 +20,7 @@ public class PassEntryViewModel extends AndroidViewModel {
 
 
 
+
     public PassEntryViewModel(@NonNull Application application) {
         super(application);
         passDAO= PassDB.getDB(application.getApplicationContext()).passDAO();

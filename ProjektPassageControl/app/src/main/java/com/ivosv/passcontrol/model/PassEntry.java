@@ -2,9 +2,15 @@ package com.ivosv.passcontrol.model;
 
 import java.io.Serializable;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Observer;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.ivosv.passcontrol.view.ReadFragment;
+
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -96,5 +102,8 @@ public class PassEntry implements Serializable {
 
     public void setImgBack(String imgBack) {
         this.imgBack = imgBack;
+    }
+
+    public void observe(ReadFragment readFragment, Observer<List<PassEntry>> listObserver) {
     }
 }

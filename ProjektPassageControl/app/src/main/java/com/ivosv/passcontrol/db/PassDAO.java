@@ -1,6 +1,7 @@
 package com.ivosv.passcontrol.db;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -8,6 +9,7 @@ import androidx.room.Update;
 import com.ivosv.passcontrol.model.PassEntry;
 import java.util.List;
 
+@Dao
 public interface PassDAO {
 
     @Query("SELECT * FROM entrydata ORDER BY id DESC")

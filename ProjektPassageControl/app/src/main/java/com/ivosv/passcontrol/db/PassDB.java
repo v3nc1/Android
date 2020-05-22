@@ -10,7 +10,7 @@ import com.ivosv.passcontrol.model.PassEntry;
 
 
 @Database(entities = {PassEntry.class}, version = 1, exportSchema = false)
-public class PassDB extends RoomDatabase {
+public abstract class PassDB extends RoomDatabase {
 
     public abstract PassDAO passDAO();
 
