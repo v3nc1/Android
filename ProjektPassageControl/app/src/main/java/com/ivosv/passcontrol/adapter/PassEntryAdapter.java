@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,9 +28,9 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
     public PassEntryAdapter(@NonNull Context context, int resource, EntryClickListener entryClickListener) {
 
         super(context, resource);
-        this.entryClickListener = entryClickListener;
         this.resource = resource;
         this.context = context;
+        this.entryClickListener = entryClickListener;
 
     }
 
@@ -37,6 +38,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
 
         private TextView entryDate;
         private TextView exitDate;
+        private ImageView slika;
 
 
     }
@@ -57,33 +59,34 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
 
                 viewHolder.entryDate = view.findViewById(R.id.podatak_ulaz);
                 viewHolder.exitDate = view.findViewById(R.id.podatak_izlaz);
+                viewHolder.slika = view.findViewById(R.id.slika);
 
 
             } else {
                 viewHolder = (ViewHolder) view.getTag();
 
             }
+
             passEntry = getItem(position);
-/*
+
             if (passEntry != null) {
-                viewHolder.entryDate.setText(passEntry.getEntryDate() + " - " + passEntry.getName() );
+                viewHolder.entryDate.setText(passEntry.getEntryDate() + " - " + passEntry.getName());
                 if (passEntry.getImgFront() == null) {
-                    Picasso.get().load(R.drawable.ic_launcher_background).fit().centerCrop().into(viewHolder.);
+                    Picasso.get().load(R.drawable.ic_launcher_background).fit().centerCrop().into(viewHolder.slika);
                 } else {
-                    Picasso.get().load(passEntry.getSlika()).fit().centerCrop().into(viewHolder.slika);
-                }*/
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    entryClickListener.onItemClick(passEntry);
+                    Picasso.get().load(passEntry.getImgFront()).fit().centerCrop().into(viewHolder.slika);
                 }
-            });
 
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        entryClickListener.onItemClick(passEntry);
+                    }
+                });
+
+            }
         }
-
-        return view;
-
+            return view;
 
     }
 
@@ -98,11 +101,11 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
         return records.get(position);
     }
 
-    public void setAlerti(List<PassEntry> alerti) {
-        this.records = alerti;
+    public void setEntrys(List<PassEntry> entries) {
+        this.records = entries;
     }
 
-    public void osvjeziAlerte() {
+    public void osvjeziEntrys() {
         notifyDataSetChanged();
     }
 

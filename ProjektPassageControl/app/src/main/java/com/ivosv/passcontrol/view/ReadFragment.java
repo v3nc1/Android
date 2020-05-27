@@ -5,20 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.ivosv.passcontrol.R;
 import com.ivosv.passcontrol.adapter.EntryClickListener;
 import com.ivosv.passcontrol.adapter.PassEntryAdapter;
 import com.ivosv.passcontrol.model.PassEntry;
 import com.ivosv.passcontrol.viewmodel.PassEntryViewModel;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -50,12 +46,12 @@ public class ReadFragment extends Fragment {
     }
 
     private void osvjeziPodatke(){
-        model.getEntry().observe(this, new Observer<List<PassEntry>>() {
+        model.getEntryRecords().observe(this, new Observer<List<PassEntry>>() {
             @Override
-            public void onChanged(@Nullable List<PassEntry> fAlertList) {
+            public void onChanged(@Nullable List<PassEntry> passEntryList) {
                 swipeRefreshLayout.setRefreshing(false);
-                ((PassEntryAdapter)listView.getAdapter()).setAlerti(fAlertList);
-                ((PassEntryAdapter) listView.getAdapter()).osvjeziAlerte();
+                ((PassEntryAdapter)listView.getAdapter()).setEntrys(passEntryList);
+                ((PassEntryAdapter)listView.getAdapter()).osvjeziEntrys();
 
             }
         });
@@ -80,6 +76,15 @@ public class ReadFragment extends Fragment {
             }
         }));
     }
+
+    @OnClick(R.id.btnNewRecord)
+    public void newEntry(){
+
+        model.setEntry(new PassEntry());
+        ((MainActivity)getActivity()).cud();
+    }
+
+
 
 
 

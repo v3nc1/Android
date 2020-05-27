@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import com.ivosv.passcontrol.R;
+import com.ivosv.passcontrol.model.DateStamp;
 import com.ivosv.passcontrol.model.PassEntry;
 import com.ivosv.passcontrol.viewmodel.PassEntryViewModel;
 import com.squareup.picasso.Picasso;
@@ -38,6 +39,7 @@ public class CUDFragment extends Fragment {
     static final int SLIKA_2=2;
 
     private String pictureRoute;
+
 
     @BindView(R.id.txtEntryTime)
     TextView entryTime;
@@ -84,15 +86,16 @@ public class CUDFragment extends Fragment {
 
     private void definirajMijenjanjeBrisanjePassEntry() {
 
-
+        save.setVisibility(View.GONE);
         entryTime.setText(passEntryViewModel.getEntry().getEntryDate());
         exitTime.setText(passEntryViewModel.getEntry().getExitDate());
         name.setText(passEntryViewModel.getEntry().getName());
         lastName.setText(passEntryViewModel.getEntry().getLastName());
-        idNumber.setText(passEntryViewModel.getEntry().getIdNumber());
+        idNumber.setText(Integer.toString(passEntryViewModel.getEntry().getIdNumber()));
         entryReason.setText(passEntryViewModel.getEntry().getReason());
 
         Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into(imgFront);
+        Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into(imgBack);
 
 
         picture.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +118,7 @@ public class CUDFragment extends Fragment {
     }
     private void defineNewPassEntry() {
 
+        entryTime.append(DateStamp.getDate());
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,13 +144,24 @@ public class CUDFragment extends Fragment {
     }
 
     private void newPassEntry() {
+
         passEntryViewModel.getEntry().setEntryDate(entryTime.getText().toString());
+        passEntryViewModel.getEntry().setEntryDate(DateStamp.getDate());
         passEntryViewModel.getEntry().setName(name.getText().toString());
         passEntryViewModel.getEntry().setLastName(lastName.getText().toString());
         passEntryViewModel.getEntry().setIdNumber(Integer.parseInt(idNumber.getText().toString()));
         passEntryViewModel.getEntry().setReason(entryReason.getText().toString());
         passEntryViewModel.addEntry();
 
+        back();
+    }
+    private void deleteEntry() {
+        passEntryViewModel.getEntry().setEntryDate(entryTime.getText().toString());
+        passEntryViewModel.getEntry().setName(name.getText().toString());
+        passEntryViewModel.getEntry().setLastName(lastName.getText().toString());
+        passEntryViewModel.getEntry().setIdNumber(Integer.parseInt(idNumber.getText().toString()));
+        passEntryViewModel.getEntry().setReason(entryReason.getText().toString());
+        passEntryViewModel.deleteEntry();
         back();
     }
 
@@ -175,8 +190,10 @@ public class CUDFragment extends Fragment {
             return;
         }
 
-        Uri slikaURI = FileProvider.getUriForFile(getActivity(),"com.ivosv.passcontrol.provider", slika);
-        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, slikaURI);
+        Uri imgFrontURI = FileProvider.getUriForFile(getActivity(),"com.ivosv.passcontrol.provider", slika);
+     //   Uri imgBackURI = FileProvider.getUriForFile(getActivity(),"com.ivosv.passcontrol.provider", imgBack);
+        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgFrontURI);
+    //    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imgBackURI);
         startActivityForResult(takePictureIntent, slikaBr);
 
     }
@@ -198,8 +215,9 @@ public class CUDFragment extends Fragment {
     }
 
     private File kreirajDatotekuSlike(String orientation) throws IOException {
-        String timeStamp = new SimpleDateFormat("HH.mm.ss_dd.MM.yyyy").format(new Date());
-        String imeSlike = "PassEntry" + timeStamp + "." + orientation + "_";
+        //String timeStamp = new SimpleDateFormat("HH.mm.ss_dd.MM.yyyy").format(new Date());
+
+        String imeSlike = "PassEntry" + DateStamp.getFileDate() + "." + orientation + "_";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imeSlike,  /* prefix */

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PassEntryViewModel extends AndroidViewModel {
 
-    private PassDAO passDAO;
+    PassDAO passDAO;
     private PassEntry passEntry;
     private LiveData<List<PassEntry>> entryRecords;
 

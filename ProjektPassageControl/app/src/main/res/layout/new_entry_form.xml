@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
@@ -63,7 +66,7 @@
             android:layout_margin="2dp"
             android:text="@string/name" />
 
-        <TextView
+        <EditText
             android:id="@+id/txtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -78,7 +81,7 @@
             android:background="#AEABAA"
             android:layout_margin="2dp"
             android:text="@string/last_name" />
-        <TextView
+        <EditText
             android:id="@+id/txtLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -101,7 +104,7 @@
             android:background="#AEABAA"
             android:layout_margin="2dp"
             android:text="@string/id_number" />
-        <TextView
+        <EditText
             android:id="@+id/txtIDnumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -113,7 +116,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-            android:layout_weight="4"
+        android:layout_weight="4"
         android:background="#000000">
         <TextView
             android:id="@+id/lblEntryReason"
@@ -121,31 +124,19 @@
             android:layout_height="wrap_content"
             android:background="#AEABAA"
             android:layout_margin="2dp"
-            android:layout_weight="1"
             android:text="@string/visit_reason" />
 
         <EditText
             android:id="@+id/txtEntryReason"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="150dp"
             android:ems="10"
             android:gravity="start|top"
             android:layout_margin="2dp"
             android:textSize="20dp"
             android:background="#AEABAA"
             android:inputType="textMultiLine" />
-            <ImageView
-            android:id="@+id/img_front"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:contentDescription="@string/noImage" />
-            <ImageView
-                android:id="@+id/img_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:contentDescription="@string/noImage" />
+
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -167,6 +158,30 @@
             android:text="@string/save" />
 
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="2"
+                android:layout_margin="2dp"
+                android:layout_gravity="start">
+                <ImageView
+                    android:id="@+id/img_front"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/noImage"
+                    tools:srcCompat="@tools:sample/avatars"/>
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/noImage"
+                    tools:srcCompat="@tools:sample/avatars"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
