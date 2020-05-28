@@ -20,7 +20,7 @@
             android:padding="5dp" />
 
         <TextView
-            android:id="@+id/podatak_ulaz"
+            android:id="@+id/person_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -29,14 +29,6 @@
             android:textColor="#3A3A3A"
             android:background="#000000"/>
 
-        <TextView
-            android:id="@+id/podatak_izlaz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:textSize="20sp"
-            android:textColor="#3A3A3A"
-            android:background="#000000"/>
+
 
     </LinearLayout>

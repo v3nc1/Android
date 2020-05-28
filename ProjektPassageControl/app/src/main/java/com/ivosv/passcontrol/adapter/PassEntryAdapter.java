@@ -1,6 +1,7 @@
 package com.ivosv.passcontrol.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -36,8 +38,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
 
     private static class ViewHolder {
 
-        private TextView entryDate;
-        private TextView exitDate;
+        private TextView personName;
         private ImageView slika;
 
 
@@ -57,8 +58,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
             if (inflater != null) {
                 view = inflater.inflate(this.resource, null);
 
-                viewHolder.entryDate = view.findViewById(R.id.podatak_ulaz);
-                viewHolder.exitDate = view.findViewById(R.id.podatak_izlaz);
+                viewHolder.personName = view.findViewById(R.id.person_name);
                 viewHolder.slika = view.findViewById(R.id.slika);
 
 
@@ -70,11 +70,15 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
             passEntry = getItem(position);
 
             if (passEntry != null) {
-                viewHolder.entryDate.setText(passEntry.getEntryDate() + " - " + passEntry.getName());
-                if (passEntry.getImgFront() == null) {
-                    Picasso.get().load(R.drawable.ic_launcher_background).fit().centerCrop().into(viewHolder.slika);
+                String exitDateValue=passEntry.getExitDate();
+                viewHolder.personName.setText(passEntry.getName() + " " + passEntry.getLastName());
+               // if (passEntry.getExitDate. == null) {
+                if (exitDateValue.equals("null")) {
+                    viewHolder.slika.setBackgroundColor(Color.RED);
+                    //Picasso.get().load(R.drawable.ic_launcher_background).fit().centerCrop().into(viewHolder.slika);
                 } else {
-                    Picasso.get().load(passEntry.getImgFront()).fit().centerCrop().into(viewHolder.slika);
+                    viewHolder.slika.setBackgroundColor(Color.GREEN);
+                    //Picasso.get().load(passEntry.getImgFront()).fit().centerCrop().into(viewHolder.slika);
                 }
 
                 view.setOnClickListener(new View.OnClickListener() {

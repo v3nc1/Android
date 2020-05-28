@@ -61,6 +61,8 @@ public class CUDFragment extends Fragment {
     ImageView imgBack;
     @BindView(R.id.btnSave)
     Button save;
+    @BindView(R.id.btnFinish)
+    Button finish;
     @BindView(R.id.btnCancle)
     Button cancle;
 
@@ -86,9 +88,15 @@ public class CUDFragment extends Fragment {
 
     private void definirajMijenjanjeBrisanjePassEntry() {
 
+
+        String exitValue=passEntryViewModel.getEntry().getExitDate();
+        if(!exitValue.equals("null")){
+            finish.setVisibility(View.GONE);
+            exitTime.setText(passEntryViewModel.getEntry().getExitDate());
+        }
+
         save.setVisibility(View.GONE);
         entryTime.setText(passEntryViewModel.getEntry().getEntryDate());
-        exitTime.setText(passEntryViewModel.getEntry().getExitDate());
         name.setText(passEntryViewModel.getEntry().getName());
         lastName.setText(passEntryViewModel.getEntry().getLastName());
         idNumber.setText(Integer.toString(passEntryViewModel.getEntry().getIdNumber()));
@@ -114,10 +122,22 @@ public class CUDFragment extends Fragment {
             }
         });
 
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                passEntryViewModel.getEntry().setExitDate(DateStamp.getDate());
+                definirajMijenjanjeBrisanjePassEntry();
+                passEntryViewModel.closeEntry();
+
+                back();
+            }
+        });
+
 
     }
     private void defineNewPassEntry() {
 
+        finish.setVisibility(View.GONE);
         entryTime.append(DateStamp.getDate());
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +166,8 @@ public class CUDFragment extends Fragment {
     private void newPassEntry() {
 
         passEntryViewModel.getEntry().setEntryDate(entryTime.getText().toString());
-        passEntryViewModel.getEntry().setEntryDate(DateStamp.getDate());
+        //passEntryViewModel.getEntry().setEntryDate(DateStamp.getDate());
+        passEntryViewModel.getEntry().setExitDate("null");
         passEntryViewModel.getEntry().setName(name.getText().toString());
         passEntryViewModel.getEntry().setLastName(lastName.getText().toString());
         passEntryViewModel.getEntry().setIdNumber(Integer.parseInt(idNumber.getText().toString()));
