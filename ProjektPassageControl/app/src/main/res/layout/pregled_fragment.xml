@@ -36,20 +36,24 @@
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnNewRecord"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="16dp"
-        android:backgroundTint="#004F91"
-        android:text="NOVI"
-        android:textColor="@android:color/white"
-        android:tint="@android:color/white"
-        app:iconPadding="25dp"
-        app:iconTint="@android:color/white" />
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        >
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+        android:textColor="#AEABAA"
+        android:textSize="16dp"
+        android:id="@+id/newEntry"
+        android:text="New Entry"
+        />
 
+
+    </LinearLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

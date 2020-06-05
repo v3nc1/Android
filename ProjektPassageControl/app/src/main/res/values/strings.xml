@@ -2,7 +2,7 @@
     <string name="app_name">PassControl</string>
     <string name="record">Evidencija</string>
     <string name="overview">Pregled</string>
-    <string name="new_entry">Potvrda ulaska</string>
+    <string name="new_entry">Novi zapis</string>
     <string name="end_record">Potvrda izlaska</string>
     <string name="open_records">Otvoreni</string>
     <string name="closed_records">Zatvoreni</string>

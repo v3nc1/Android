@@ -9,13 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ivosv.passcontrol.R;
 import com.ivosv.passcontrol.model.PassEntry;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
     private static class ViewHolder {
 
         private TextView personName;
-        private ImageView slika;
+        private ImageView status;
 
 
     }
@@ -59,7 +57,7 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
                 view = inflater.inflate(this.resource, null);
 
                 viewHolder.personName = view.findViewById(R.id.person_name);
-                viewHolder.slika = view.findViewById(R.id.slika);
+                viewHolder.status = view.findViewById(R.id.slika);
 
 
             } else {
@@ -71,13 +69,13 @@ public class PassEntryAdapter extends ArrayAdapter<PassEntry> {
 
             if (passEntry != null) {
                 String exitDateValue=passEntry.getExitDate();
-                viewHolder.personName.setText(passEntry.getName() + " " + passEntry.getLastName());
+                viewHolder.personName.setText(passEntry.getName() + " " + passEntry.getLastName()+"\n"+passEntry.getEntryDate());
                // if (passEntry.getExitDate. == null) {
                 if (exitDateValue.equals("null")) {
-                    viewHolder.slika.setBackgroundColor(Color.RED);
+                    viewHolder.status.setColorFilter(Color.RED);
                     //Picasso.get().load(R.drawable.ic_launcher_background).fit().centerCrop().into(viewHolder.slika);
                 } else {
-                    viewHolder.slika.setBackgroundColor(Color.GREEN);
+                    viewHolder.status.setColorFilter(Color.GREEN);
                     //Picasso.get().load(passEntry.getImgFront()).fit().centerCrop().into(viewHolder.slika);
                 }
 

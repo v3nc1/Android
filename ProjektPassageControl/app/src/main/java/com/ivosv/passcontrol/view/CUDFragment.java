@@ -2,6 +2,7 @@ package com.ivosv.passcontrol.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,21 +25,19 @@ import butterknife.OnClick;
 
 import com.ivosv.passcontrol.R;
 import com.ivosv.passcontrol.model.DateStamp;
-import com.ivosv.passcontrol.model.PassEntry;
 import com.ivosv.passcontrol.viewmodel.PassEntryViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CUDFragment extends Fragment {
 
     static final int SLIKA_1=1;
     static final int SLIKA_2=2;
 
-    private String pictureRoute;
+    private String pictureRouteFront;
+    private String pictureRouteBack;
 
 
     @BindView(R.id.txtEntryTime)
@@ -65,6 +64,8 @@ public class CUDFragment extends Fragment {
     Button finish;
     @BindView(R.id.btnCancle)
     Button cancle;
+    @BindView(R.id.btnDelete)
+    Button delete;
 
     PassEntryViewModel passEntryViewModel;
 
@@ -80,13 +81,13 @@ public class CUDFragment extends Fragment {
             return view;
         }
 
-        definirajMijenjanjeBrisanjePassEntry();
+        editPassEntry();
 
         return view;
 
     }
 
-    private void definirajMijenjanjeBrisanjePassEntry() {
+    private void editPassEntry() {
 
 
         String exitValue=passEntryViewModel.getEntry().getExitDate();
@@ -94,7 +95,8 @@ public class CUDFragment extends Fragment {
             finish.setVisibility(View.GONE);
             exitTime.setText(passEntryViewModel.getEntry().getExitDate());
         }
-
+        picture.setEnabled(false);
+        delete.setVisibility(View.GONE); //Treba maknuti ako se misli brisati zapis
         save.setVisibility(View.GONE);
         entryTime.setText(passEntryViewModel.getEntry().getEntryDate());
         name.setText(passEntryViewModel.getEntry().getName());
@@ -103,8 +105,21 @@ public class CUDFragment extends Fragment {
         entryReason.setText(passEntryViewModel.getEntry().getReason());
 
         Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into(imgFront);
-        Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).error(R.drawable.ic_launcher_background).into(imgBack);
+        Picasso.get().load(passEntryViewModel.getEntry().getImgBack()).error(R.drawable.ic_launcher_background).into(imgBack);
 
+        imgFront.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).previewFront();
+            }
+        });
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).previewBack();
+            }
+        });
 
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +141,17 @@ public class CUDFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 passEntryViewModel.getEntry().setExitDate(DateStamp.getDate());
-                definirajMijenjanjeBrisanjePassEntry();
+                editPassEntry();
                 passEntryViewModel.closeEntry();
 
                 back();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteEntry();
             }
         });
 
@@ -137,6 +159,7 @@ public class CUDFragment extends Fragment {
     }
     private void defineNewPassEntry() {
 
+        delete.setVisibility(View.GONE); //Treba maknuti ako se misli brisati zapis
         finish.setVisibility(View.GONE);
         entryTime.append(DateStamp.getDate());
         picture.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +181,18 @@ public class CUDFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                newPassEntry();
+                int test;
+
+                try {
+                    test=Integer.parseInt(idNumber.getText().toString());
+
+                    if(test>0){
+                        newPassEntry();
+                    }
+                }catch (Exception e){
+                    idNumber.setBackgroundColor(Color.RED);
+                }
+
             }
         });
     }
@@ -223,14 +257,16 @@ public class CUDFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == SLIKA_1 && resultCode == Activity.RESULT_OK) {
 
-            passEntryViewModel.getEntry().setImgFront("file://" + pictureRoute);
+            passEntryViewModel.getEntry().setImgFront("file://" + pictureRouteFront);
             passEntryViewModel.closeEntry();
             Picasso.get().load(passEntryViewModel.getEntry().getImgFront()).into(imgFront);
 
-        }else {
-            passEntryViewModel.getEntry().setImgBack("file://" + pictureRoute);
+            passEntryViewModel.getEntry().setImgBack("file://" + pictureRouteBack);
             passEntryViewModel.closeEntry();
             Picasso.get().load(passEntryViewModel.getEntry().getImgBack()).into(imgBack);
+
+        }else {
+
 
         }
     }
@@ -245,8 +281,13 @@ public class CUDFragment extends Fragment {
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
+        if(orientation.equals("Front")) {
 
-        pictureRoute = image.getAbsolutePath();
+
+            pictureRouteFront = image.getAbsolutePath();
+        }else{
+            pictureRouteBack = image.getAbsolutePath();
+        }
         return image;
     }
 

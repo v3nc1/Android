@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <corners android:radius="5dp"/> // if you want clear round shape then make radius size is half of your  button`s height.
+    <solid android:color="#FFFFFF"/> // Button Colour
+    <padding
+        android:bottom="20dp"
+        android:left="20dp"
+        android:right="20dp"
+        android:top="20dp"/>
+
+    <size
+        android:height="2dp"
+        android:width="2dp"
+
+        />
+
+
+</shape>

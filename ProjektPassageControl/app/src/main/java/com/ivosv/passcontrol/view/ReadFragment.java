@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,7 @@ public class ReadFragment extends Fragment {
     @BindView(R.id.lista)
     ListView listView;
 
+
     private PassEntryViewModel model;
 
     @Override
@@ -41,6 +43,7 @@ public class ReadFragment extends Fragment {
         definirajListu();
         definirajSwipe();
         osvjeziPodatke();
+
 
         return view;
     }
@@ -77,12 +80,14 @@ public class ReadFragment extends Fragment {
         }));
     }
 
-    @OnClick(R.id.btnNewRecord)
+    @OnClick(R.id.newEntry)
     public void newEntry(){
 
         model.setEntry(new PassEntry());
         ((MainActivity)getActivity()).cud();
     }
+
+
 
 
 

@@ -12,7 +12,7 @@ public class DateStamp {
 
     public static String getDate(){
 
-        String timeStamp = new SimpleDateFormat("HH:mm:ss-dd/MM/yyyy").format(new Date());
+        String timeStamp = new SimpleDateFormat("dd/MM/yyyy-HH:mm:ss").format(new Date());
         //String imeSlike = "PassEntry" + timeStamp + "." + orientation + "_";
 
         Log.w("DATE FORMAT: ",timeStamp);
