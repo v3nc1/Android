@@ -1,19 +1,18 @@
 <resources>
     <string name="app_name">PassControl</string>
-    <string name="record">Evidencija</string>
-    <string name="overview">Pregled</string>
     <string name="new_entry">Novi zapis</string>
     <string name="end_record">Potvrda izlaska</string>
-    <string name="open_records">Otvoreni</string>
-    <string name="closed_records">Zatvoreni</string>
     <string name="entry_time">Vrijeme ulaza</string>
     <string name="exit_time">Vrijeme izlaza</string>
     <string name="name">Ime</string>
     <string name="last_name">Prezime</string>
     <string name="id_number">Broj osobne iskaznice</string>
     <string name="visit_reason">Razlog ulaska</string>
-    <string name="noImage">No Image</string>
+    <string name="take_picture">Slikaj dokument</string>
+    <string name="picture_front">Slikaj dokument</string>
+    <string name="picture_back">Slikaj dokument</string>
     <string name="cancle">CANCLE</string>
+    <string name="delete">DELETE</string>
     <string name="save">SAVE</string>
     <string name="finish">FINISH</string>
     <string name="back">BACK</string>

@@ -234,7 +234,7 @@ public class CUDFragment extends Fragment {
 
         File slika = null;
         try {
-            slika = kreirajDatotekuSlike(orientation);
+            slika = createImageFile(orientation);
         } catch (IOException ex) {
             Toast.makeText(getActivity(), "Problem kod kreiranja slike", Toast.LENGTH_LONG).show();
             return;
@@ -271,13 +271,13 @@ public class CUDFragment extends Fragment {
         }
     }
 
-    private File kreirajDatotekuSlike(String orientation) throws IOException {
+    private File createImageFile(String orientation) throws IOException {
         //String timeStamp = new SimpleDateFormat("HH.mm.ss_dd.MM.yyyy").format(new Date());
 
-        String imeSlike = "PassEntry" + DateStamp.getFileDate() + "." + orientation + "_";
+        String imageName = "PassEntry" + DateStamp.getFileDate() + "." + orientation + "_";
         File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imeSlike,  /* prefix */
+                imageName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );

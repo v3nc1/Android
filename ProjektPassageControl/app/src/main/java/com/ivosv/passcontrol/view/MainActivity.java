@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
     public void cud(){ setFragment(new CUDFragment());}
 
     public void previewFront(){ setFragment(new Preview("front"));}
+
     public void previewBack(){ setFragment(new Preview("back"));}
 
     private void setFragment(Fragment fragment){
-
 
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();

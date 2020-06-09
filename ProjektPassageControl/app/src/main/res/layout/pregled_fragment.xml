@@ -45,11 +45,11 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#000000"
-        android:textColor="#AEABAA"
+        android:background="@color/black"
+        android:textColor="@color/grey"
         android:textSize="16dp"
         android:id="@+id/newEntry"
-        android:text="New Entry"
+        android:text="@string/new_entry"
         />
 
 

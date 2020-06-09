@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -40,15 +39,15 @@ public class ReadFragment extends Fragment {
 
         model = ((MainActivity)getActivity()).getModel();
 
-        definirajListu();
-        definirajSwipe();
-        osvjeziPodatke();
+        defList();
+        defSwipe();
+        refreshData();
 
 
         return view;
     }
 
-    private void osvjeziPodatke(){
+    private void refreshData(){
         model.getEntryRecords().observe(this, new Observer<List<PassEntry>>() {
             @Override
             public void onChanged(@Nullable List<PassEntry> passEntryList) {
@@ -59,17 +58,17 @@ public class ReadFragment extends Fragment {
             }
         });
     }
-    private void definirajSwipe() {
+    private void defSwipe() {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                osvjeziPodatke();
+                refreshData();
             }
         });
 
     }
 
-    private void definirajListu() {
+    private void defList() {
 
         listView.setAdapter( new PassEntryAdapter(getActivity(), R.layout.red, new EntryClickListener() {
             @Override
